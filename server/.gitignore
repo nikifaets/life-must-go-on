@@ -1,0 +1,4 @@
+**/__pycache__
+**/.vscode
+nlu/rasa_core/models/*
+!nlu/rasa_core/models/best_model/
