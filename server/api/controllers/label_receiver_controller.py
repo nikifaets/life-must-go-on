@@ -20,8 +20,8 @@ class LabelReceiverController:
             parser = reqparse.RequestParser()
             parser.add_argument('name', type=str)
 
-            category_name = parser.parse_args()[0]
-            print("LABEL IS ", parser.parse_args()[0])#, label)
+            category_name = parser.parse_args()['name']
+            print("LABEL IS ", parser.parse_args())#, label)
             ##send request to database
             return get_category(category_name)
 

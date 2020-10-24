@@ -8,5 +8,5 @@ def get_categories_list():
 
 def get_category(category):
 
-    pass
+    return "lalal"
     return requests.get(DATA_SERVICE_URL + "\\" + category)
