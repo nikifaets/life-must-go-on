@@ -23,21 +23,49 @@ function fetchDBCollectionNames(){
 		});
 	})
 };
+function fetchAllEventsOfCollection(eventType){
+	return new Promise((resolve,reject)=>{
+		client.connect(err => {
+			if(err) throw err;
+			db = client.db("events");
+			let collection = db.collection(eventType);
+			let query = {};
+			let x = collection.findOne(query);
+			x.then((result)=>{
+				resolve(result);
+			}).catch((error)=>{
+				reject(error);
+			})
+			console.log(x);
+		});
+	});
+}
 
 server.on('request',(request,response)=>{
 	dbNames = [];
 	const {method, url} = request;
 	console.log(url);
-	fetchDBCollectionNames().then((result)=>{
-		console.log(result);
-		for(x of result){
-			dbNames.push(x.name);
-		}
-		response.setHeader('Content-Type','application/json');
-		response.end(JSON.stringify(dbNames));
-	}).catch((error)=>{
-		console.log(error);
-	});
+	if(url=='/'){
+		fetchDBCollectionNames().then((result)=>{
+			console.log(result);
+			for(x of result){
+				dbNames.push(x.name);
+			}
+			response.setHeader('Content-Type','application/json');
+			response.end(JSON.stringify(dbNames));
+		}).catch((error)=>{
+			console.log(error);
+		});
+	}else{
+		let coll = url.substring(1);
+		fetchAllEventsOfCollection(coll).then((result)=>{
+			console.log(result);
+			response.setHeader('Content-Type','application/json');
+			response.end(JSON.stringify(result));
+		}).catch((error)=>{
+			console.log(error);
+		});	
+	}
 });
 
 server.listen(port, hostname, () => {
