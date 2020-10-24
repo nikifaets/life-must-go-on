@@ -10,37 +10,33 @@ const server = http.createServer();
 let dbNames = [];
 function fetchDBCollectionNames(){
 	return new Promise((resolve, reject) => {
-	    try{
-		let data = 123;
 		client.connect(err => {
 			if(err) throw err;
 			db = client.db("events");
-			db.listCollections().toArray(function(err, collInfos) {
-				// collInfos is an array of collection info objects that look like:
-				// { name: 'test', options: {} }
-				console.log(collInfos);
-				for( x of collInfos){
-					dbNames.push(x.name);
-				}
-				console.log(dbNames);
-				console.log("names fetched");
-			});
-			client.close();	
+			let x = db.listCollections().toArray();
+			x.then((result)=>{
+				resolve(result);
+			}).catch((error)=>{
+				reject(error);
+			})
+			console.log(x);
 		});
-		resolve(data)
-	    }
-	    catch(error){
-		reject(error)
-	    }
 	})
 };
 
 server.on('request',(request,response)=>{
+	dbNames = [];
 	const {method, url} = request;
 	console.log(url);
 	fetchDBCollectionNames().then((result)=>{
+		console.log(result);
+		for(x of result){
+			dbNames.push(x.name);
+		}
 		response.setHeader('Content-Type','application/json');
 		response.end(JSON.stringify(dbNames));
+	}).catch((error)=>{
+		console.log(error);
 	});
 });
 
