@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:life_must_go_on/event_list.dart';
 
 // TODO: make name to be custom data type
 class CategoryTile extends StatelessWidget {
@@ -8,11 +9,8 @@ class CategoryTile extends StatelessWidget {
 
   void navigateToCategory(BuildContext context, String name) {
     Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(this.name),
-        ),
-        body: Text("Description for " + this.name),
+      return EventList(
+        category: name,
       );
     }));
   }

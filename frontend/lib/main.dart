@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:life_must_go_on/category_tile.dart';
+import 'package:life_must_go_on/constants.dart';
+import 'package:life_must_go_on/error.dart';
+import 'package:life_must_go_on/loading_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,42 +13,51 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Life must go on',
+      title: projectTitle,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.lightGreen,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Life must go on'),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
+  MyHomePage({Key key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-// TODO: get categories
+// TODO: getegories from API
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    final title = widget.title;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: ListView.builder(
-        padding: EdgeInsets.all(16.0),
-        itemCount: 10,
-        itemBuilder: (context, i) {
-          return CategoryTile(name: "Category number: " + i.toString());
-        },
-      ),
+    return FutureBuilder(
+      future: Future.delayed(
+          Duration(seconds: 0), () => ["Clothes", "Toys", "Food", "Household"]),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(projectTitle),
+            ),
+            body: ListView.builder(
+              padding: EdgeInsets.all(16.0),
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, i) {
+                return CategoryTile(name: snapshot.data[i]);
+              },
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return MyError();
+        } else {
+          return LoadingScreen();
+        }
+      },
     );
   }
 }
