@@ -31,7 +31,6 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-// TODO: getegories from API
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {

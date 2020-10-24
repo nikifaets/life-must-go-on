@@ -9,6 +9,14 @@ class EventEntry {
 
   EventEntry(
       {this.name, this.description, this.beginning, this.ending, this.link});
+
+  factory EventEntry.fromJson(Map<String, dynamic> json) {
+    return EventEntry(
+      name: json['name'],
+      description: json['description'],
+      link: json['link'],
+    );
+  }
 }
 
 final dummyEvent = EventEntry(
