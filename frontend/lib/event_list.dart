@@ -1,15 +1,30 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:life_must_go_on/constants.dart';
 import 'package:life_must_go_on/data/event.dart';
 import 'package:life_must_go_on/error.dart';
 import 'package:life_must_go_on/event_tile.dart';
 import 'package:life_must_go_on/loading_screen.dart';
+import 'package:http/http.dart' as http;
 
-// TODO: get events
 class EventList extends StatelessWidget {
   final String category;
   final event = dummyEvent;
 
   EventList({Key key, this.category}) : super(key: key);
+
+  Future<List<EventEntry>> fetchEvents() async {
+    final response = await http.get(endpoint + "/label?name=" + category);
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body)
+          .map((item) => EventEntry.fromJson(item))
+          .toList();
+    } else {
+      throw Exception('Failed to fetch events');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +34,7 @@ class EventList extends StatelessWidget {
       ),
       body: Center(
         child: FutureBuilder(
-          future: Future.delayed(
-              Duration(seconds: 0), () => [dummyEvent, dummyEvent, dummyEvent]),
+          future: fetchEvents(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(

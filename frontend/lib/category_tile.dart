@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_must_go_on/event_list.dart';
 
-// TODO: make name to be custom data type
 class CategoryTile extends StatelessWidget {
   final name;
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:life_must_go_on/data/event.dart';
 
-// TODO: make name to be custom data type
 class EventTile extends StatelessWidget {
   final EventEntry event;
 
@@ -18,15 +17,13 @@ class EventTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
+    return FlatButton(
+      onPressed: () {
         _launchURL(event.link);
       },
-      child: Container(
-        child: ListTile(
-          title: Text(event.name),
-          subtitle: Text(event.description),
-        ),
+      child: ListTile(
+        title: Text(event.name),
+        subtitle: Text(event.description),
       ),
     );
   }
