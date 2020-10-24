@@ -7,31 +7,41 @@ const port = 2704;
 const hostname = '127.0.0.1';
 const server = http.createServer();
 
-var dbNames = [];
-
+let dbNames = [];
 function fetchDBCollectionNames(){
-client.connect(err => {
-	if(err) throw err;
-	db = client.db("events");
-	db.listCollections().toArray(function(err, collInfos) {
-		// collInfos is an array of collection info objects that look like:
-		// { name: 'test', options: {} }
-		for( x of collInfos){
-			dbNames.push(x.name);
-		}
-		console.log(dbNames);
-		console.log("names fetched");
-	});
-	client.close();	
-});
+	return new Promise((resolve, reject) => {
+	    try{
+		let data = 123;
+		client.connect(err => {
+			if(err) throw err;
+			db = client.db("events");
+			db.listCollections().toArray(function(err, collInfos) {
+				// collInfos is an array of collection info objects that look like:
+				// { name: 'test', options: {} }
+				console.log(collInfos);
+				for( x of collInfos){
+					dbNames.push(x.name);
+				}
+				console.log(dbNames);
+				console.log("names fetched");
+			});
+			client.close();	
+		});
+		resolve(data)
+	    }
+	    catch(error){
+		reject(error)
+	    }
+	})
 };
 
-fetchDBCollectionNames();
 server.on('request',(request,response)=>{
 	const {method, url} = request;
 	console.log(url);
-	response.setHeader('Content-Type','application/json');
-	response.end(JSON.stringify(dbNames));
+	fetchDBCollectionNames().then((result)=>{
+		response.setHeader('Content-Type','application/json');
+		response.end(JSON.stringify(dbNames));
+	});
 });
 
 server.listen(port, hostname, () => {
