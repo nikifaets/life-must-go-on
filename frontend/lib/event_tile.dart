@@ -17,13 +17,26 @@ class EventTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return RaisedButton(
       onPressed: () {
         _launchURL(event.link);
       },
-      child: ListTile(
-        title: Text(event.name),
-        subtitle: Text(event.description),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      child: Container(
+        padding: EdgeInsets.all(10),
+        child: ListTile(
+          title: Text(
+            event.name,
+            style: Theme.of(context)
+                .textTheme
+                .headline5
+                .copyWith(fontWeight: FontWeight.bold),
+          ),
+          subtitle: Container(
+            margin: EdgeInsets.only(top: 15),
+            child: Text(event.description),
+          ),
+        ),
       ),
     );
   }

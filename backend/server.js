@@ -23,12 +23,12 @@ function fetchDBCollectionNames(){
 		});
 	})
 };
-function fetchAllEventsOfCollection(eventType){
+function fetchAllEventsOfCategory(eventCategory){
 	return new Promise((resolve,reject)=>{
 		client.connect(err => {
 			if(err) throw err;
 			db = client.db("events");
-			let collection = db.collection(eventType);
+			let collection = db.collection(eventCategory);
 			let query = {};
 			let x = collection.findOne(query);
 			x.then((result)=>{
@@ -40,7 +40,20 @@ function fetchAllEventsOfCollection(eventType){
 		});
 	});
 }
-
+function insertEventIntoCategory(eventObj, eventCategory){
+	client.connect(err => {
+		if(err) throw err;
+		db = client.db("events");
+		let collection = db.collection(eventCategory);
+		collection.insertOne(eventObj).then((result)=>{
+			console.log(result);
+		}).catch((error)=>{
+			console.log(error);
+		});
+	});
+}
+//Example usage:
+//insertEventIntoCategory({name:'Pesho'},'toys');
 server.on('request',(request,response)=>{
 	dbNames = [];
 	const {method, url} = request;
@@ -57,8 +70,21 @@ server.on('request',(request,response)=>{
 			console.log(error);
 		});
 	}else{
-		let coll = url.substring(1);
-		fetchAllEventsOfCollection(coll).then((result)=>{
+		let eventCategory = url.substring(1);
+		//read new event if supplied in the http req body as JSON	
+		let data = '';
+		
+		request.on('data', chunk => {
+			data += chunk;
+		})
+		request.on('end', () => {
+			if(data){
+				console.log(JSON.parse(data)); 
+				insertEventIntoCategory(JSON.parse(data),eventCategory);
+			}
+		})
+
+		fetchAllEventsOfCategory(eventCategory).then((result)=>{
 			console.log(result);
 			response.setHeader('Content-Type','application/json');
 			response.end(JSON.stringify(result));

@@ -7,12 +7,15 @@ class AddEvent extends StatefulWidget {
 }
 
 class _AddEventState extends State<AddEvent> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   String name = "";
   String description = "";
   String link = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text("Add new event"),
       ),
@@ -58,14 +61,16 @@ class _AddEventState extends State<AddEvent> {
                   },
                 ),
               ),
-              Text("$name $description $link")
+              // Text("$name $description $link")
             ],
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
       ),
     );
   }
