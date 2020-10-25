@@ -14,7 +14,7 @@ class EventEntry {
     return EventEntry(
       name: json['name'],
       description: json['description'],
-      link: json['link'],
+      link: json['url'],
     );
   }
 }
