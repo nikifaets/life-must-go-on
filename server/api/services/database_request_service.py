@@ -1,6 +1,7 @@
 import requests
+import json
 
-DATA_SERVICE_URL = "localhost:2704"
+DATA_SERVICE_URL = "http://127.0.0.1:2704/"
 
 def get_categories_list():
 
@@ -8,5 +9,9 @@ def get_categories_list():
 
 def get_category(category):
 
-    return "lalal"
-    return requests.get(DATA_SERVICE_URL + "\\" + category)
+    response = requests.get(DATA_SERVICE_URL + "household")
+    print("CATEGORY ", (response.text))
+    response = json.loads(response.text)
+    #response = json.dumps([response])
+    print(response, type(response))
+    return response

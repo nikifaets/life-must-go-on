@@ -18,7 +18,7 @@ class EventList extends StatelessWidget {
     final response = await http.get(endpoint + "/label?name=" + category);
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.body)
+      return jsonDecode(jsonDecode(response.body))
           .map((item) => EventEntry.fromJson(item))
           .toList();
     } else {
