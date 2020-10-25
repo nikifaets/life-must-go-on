@@ -38,12 +38,12 @@ class EventList extends StatelessWidget {
             if (snapshot.hasData) {
               return ListView.builder(
                 padding: EdgeInsets.all(16.0),
-                itemCount: snapshot.data.length * 2 - 1,
+                itemCount: snapshot.data.length, // * 2 - 1,
                 itemBuilder: (context, i) {
-                  if (i.isOdd) return Divider();
+                  // if (i.isOdd) return Divider();
 
-                  final index = i ~/ 2;
-                  return EventTile(event: snapshot.data[index]);
+                  //final index = i ~/ 2;
+                  return EventTile(event: snapshot.data[i]);
                 },
               );
             } else if (snapshot.hasError) {

@@ -17,36 +17,39 @@ class EventTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-      onPressed: () {
-        _launchURL(event.link);
-      },
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: NetworkImage(
-              event.imgUrl,
-            ),
-            colorFilter: ColorFilter.mode(
-              Colors.white.withOpacity(0.1),
-              BlendMode.dstATop,
+    return Container(
+      margin: EdgeInsets.only(bottom: 15),
+      child: RaisedButton(
+        onPressed: () {
+          _launchURL(event.link);
+        },
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: NetworkImage(
+                event.imgUrl,
+              ),
+              colorFilter: ColorFilter.mode(
+                Colors.white.withOpacity(0.1),
+                BlendMode.dstATop,
+              ),
             ),
           ),
-        ),
-        padding: EdgeInsets.all(10),
-        child: ListTile(
-          title: Text(
-            event.name,
-            style: Theme.of(context)
-                .textTheme
-                .headline5
-                .copyWith(fontWeight: FontWeight.bold),
-          ),
-          subtitle: Container(
-            margin: EdgeInsets.only(top: 15),
-            child: Text(event.description),
+          padding: EdgeInsets.all(10),
+          child: ListTile(
+            title: Text(
+              event.name,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline5
+                  .copyWith(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Container(
+              margin: EdgeInsets.only(top: 15),
+              child: Text(event.description),
+            ),
           ),
         ),
       ),
