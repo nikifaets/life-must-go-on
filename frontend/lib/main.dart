@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: projectTitle,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.lightGreen,
+        primarySwatch: Colors.cyan,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(),
@@ -47,12 +47,24 @@ class _MyHomePageState extends State<MyHomePage> {
             drawer: MyDrawer(
               curr: "home",
             ),
-            body: ListView.builder(
-              padding: EdgeInsets.all(16.0),
-              itemCount: snapshot.data.length,
-              itemBuilder: (context, i) {
-                return CategoryTile(name: snapshot.data[i]);
-              },
+            body: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("lib/assets/background.jpg"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CategoryTile(name: snapshot.data[0]),
+                      CategoryTile(name: snapshot.data[1]),
+                      CategoryTile(name: snapshot.data[2]),
+                      CategoryTile(name: snapshot.data[3]),
+                    ]),
+              ),
             ),
           );
         } else if (snapshot.hasError) {

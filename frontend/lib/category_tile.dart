@@ -17,22 +17,30 @@ class CategoryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 20),
-      child: FlatButton(
-        padding: EdgeInsets.all(15),
-        onPressed: () {
-          navigateToCategory(context, this.name);
-        },
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        color: Theme.of(context).backgroundColor,
-        child: Text(
-          this.name,
-          style: Theme.of(context)
-              .textTheme
-              .headline4
-              .copyWith(fontWeight: FontWeight.bold),
+      margin: EdgeInsets.symmetric(horizontal: 30),
+      child: SizedBox(
+        width: double.infinity,
+        child: Container(
+          margin: EdgeInsets.only(bottom: 20),
+          child: FlatButton(
+            padding: EdgeInsets.all(15),
+            onPressed: () {
+              navigateToCategory(context, this.name);
+            },
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            color: Colors.white70,
+            child: Container(
+              child: Text(
+                this.name,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline4
+                    .copyWith(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
         ),
       ),
     );
