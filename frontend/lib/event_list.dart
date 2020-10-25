@@ -20,7 +20,7 @@ class EventList extends StatelessWidget {
     if (response.statusCode == 200) {
       return jsonDecode(jsonDecode(response.body))
           .map((item) => EventEntry.fromJson(item))
-          .toList();
+          .toList<EventEntry>();
     } else {
       throw Exception('Failed to fetch events');
     }
