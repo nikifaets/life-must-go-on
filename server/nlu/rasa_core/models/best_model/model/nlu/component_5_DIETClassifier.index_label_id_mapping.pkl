@@ -1,0 +1,1 @@
+{"0": "giveaway", "1": "recycle"}

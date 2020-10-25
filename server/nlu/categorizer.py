@@ -4,7 +4,7 @@ class Categorizer:
 
     def __init__(self):
 
-        self.DESIRED_ENTITIES = {"ORG", "PROD", "EVENT", "MISC"}
+        self.DESIRED_ENTITIES = {"ORG", "PROD", "EVENT"}
 
     def load_model(self):
 

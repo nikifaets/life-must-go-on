@@ -9,9 +9,9 @@ def get_categories_list():
 
 def get_category(category):
 
-    response = requests.get(DATA_SERVICE_URL + "household")
+    response = requests.get(DATA_SERVICE_URL + category)
     print("CATEGORY ", (response.text))
     response = json.loads(response.text)
-    #response = json.dumps([response])
+    response = [response]
     print(response, type(response))
     return response
