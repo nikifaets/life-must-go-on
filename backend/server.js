@@ -30,13 +30,13 @@ function fetchAllEventsOfCategory(eventCategory){
 			db = client.db("events");
 			let collection = db.collection(eventCategory);
 			let query = {};
-			let x = collection.findOne(query);
-			x.then((result)=>{
-				resolve(result);
-			}).catch((error)=>{
-				reject(error);
-			})
-			console.log(x);
+			let x = collection.find(query).toArray((err, res) => {
+				if (err) {	
+					reject(err);
+				} else {
+					resolve(res);
+				}
+			});
 		});
 	});
 }
