@@ -23,6 +23,18 @@ class EventTile extends StatelessWidget {
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: NetworkImage(
+              event.imgUrl,
+            ),
+            colorFilter: ColorFilter.mode(
+              Colors.white.withOpacity(0.1),
+              BlendMode.dstATop,
+            ),
+          ),
+        ),
         padding: EdgeInsets.all(10),
         child: ListTile(
           title: Text(

@@ -4,18 +4,29 @@ class EventEntry {
   String name;
   String description;
   String link;
+  String imgUrl;
   DateTime beginning;
   DateTime ending;
 
   EventEntry(
-      {this.name, this.description, this.beginning, this.ending, this.link});
+      {this.name,
+      this.description,
+      this.beginning,
+      this.ending,
+      this.link,
+      this.imgUrl});
 
   factory EventEntry.fromJson(Map<String, dynamic> json) {
-    return EventEntry(
+    var e = EventEntry(
       name: json['name'],
       description: json['description'],
       link: json['url'],
+      imgUrl: json['imgUrl'],
     );
+    if (e.imgUrl == null) {
+      e.imgUrl = "";
+    }
+    return e;
   }
 }
 
