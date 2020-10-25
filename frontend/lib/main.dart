@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:life_must_go_on/category_tile.dart';
 import 'package:life_must_go_on/constants.dart';
+import 'package:life_must_go_on/drawer.dart';
 import 'package:life_must_go_on/error.dart';
 import 'package:life_must_go_on/loading_screen.dart';
 
@@ -42,6 +43,9 @@ class _MyHomePageState extends State<MyHomePage> {
           return Scaffold(
             appBar: AppBar(
               title: Text(projectTitle),
+            ),
+            drawer: MyDrawer(
+              curr: "home",
             ),
             body: ListView.builder(
               padding: EdgeInsets.all(16.0),
