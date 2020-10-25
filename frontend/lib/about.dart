@@ -43,7 +43,7 @@ class AboutPage extends StatelessWidget {
               Container(
                 margin: EdgeInsets.all(15),
                 child: Image.network(
-                  "https://lh3.googleusercontent.com/proxy/H_2cfa6ffvsThHloDRDJle0r6qU2evSSkHcXvsl9MFfD5z9szjnYH0kuWnPu599Jl-X_-Ya4JSEsyQzf5mL5rL7R_agv0OiQ8HmrbzIMBTtyerqqXYsmzmjO15c0cmzGBIjOisgALNJcHbY-P6qpY4hx6BUTelD8NywzNPsmmIb-vpAChU8yGYLs",
+                  "https://img.pngio.com/recycle-waste-symbol-recycling-bin-png-download-free-recycle-recycle-logo-png-920_880.png",
                   width: width / 2,
                 ),
               ),

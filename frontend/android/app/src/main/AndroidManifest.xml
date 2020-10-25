@@ -9,7 +9,7 @@
     <application
         android:usesCleartextTraffic="true"
         android:name="io.flutter.app.FlutterApplication"
-        android:label="life_must_go_on"
+        android:label="Life must go on"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
