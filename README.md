@@ -1,6 +1,6 @@
 # life-must-go-on
 
-:trophy: 3rd place winner at fmi{codes} a sponsor award
+:trophy: 3rd place winner at fmi{codes} and a sponsor award
 
 We have tons of items that we don't need but it is bothersome to research how to get rid of them. Many times throwing them away is not a good option. The earth is not a trash bin.
 
